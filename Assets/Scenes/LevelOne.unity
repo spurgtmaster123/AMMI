@@ -619,8 +619,18 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7451537444614695993, guid: 47760cf396feb1d4086ea3a1c0da0714,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.7316124
+      objectReference: {fileID: 0}
+    - target: {fileID: 7451537444614695993, guid: 47760cf396feb1d4086ea3a1c0da0714,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7451537444614695993, guid: 47760cf396feb1d4086ea3a1c0da0714,
+        type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1
+      value: 1.35
       objectReference: {fileID: 0}
     - target: {fileID: 7451537444614695993, guid: 47760cf396feb1d4086ea3a1c0da0714,
         type: 3}
@@ -672,6 +682,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cable_02 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8584425007362873174, guid: 47760cf396feb1d4086ea3a1c0da0714,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f688f0cd9fdb544c69ce90cc0300cee9, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
