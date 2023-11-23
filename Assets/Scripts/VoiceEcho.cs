@@ -15,7 +15,7 @@ public class VoiceEcho : MonoBehaviour
 
     public float cooldown = 1;
 
-    private bool startEcho = true;
+    public bool startEcho = true;
 
     public GameObject echo;
 
@@ -45,7 +45,7 @@ public class VoiceEcho : MonoBehaviour
         }
     }
 
-    IEnumerator timer()
+    public IEnumerator timer()
     {
         
         Instantiate(echo, this.transform);

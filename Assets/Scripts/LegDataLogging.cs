@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.XR;
 using static UnityEditor.PlayerSettings;
@@ -41,13 +42,23 @@ public class LegDataLogging : MonoBehaviour
 
     float jolt;
 
+    public float echoValueForFoot;
 
     public Transform handPos;
+
+    Rigidbody rb;
+
+    public VoiceEcho voiceEcho;
+    private bool startEcho = true;
+    private float cooldown;
+    public GameObject echo;
+    private float threshold;
 
     // Start is called before the first frame update
     void Start()
     {
         oldTime = Time.time;
+        rb = gameObject.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -162,6 +173,46 @@ public class LegDataLogging : MonoBehaviour
             NewValue = (((OldValue - OldMin) * NewRange) / OldRange) + NewMin;
         }
 
+
+
+    }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (CompareTag("Floor"))
+        {
+            echoValueForFoot = rb.velocity.y;
+
+            echoValueForFoot = jolt;
+
+            //if (voiceEcho.startEcho)
+            //{
+            //    StartCoroutine(voiceEcho.timer());
+            //}
+
+            if (echoValueForFoot > threshold)
+            {
+                if (startEcho) { StartCoroutine(timer()); }
+                echoValueForFoot = 0;
+
+
+            }
+
+
+
+        }
+    }
+
+    IEnumerator timer()
+    {
+
+        Instantiate(echo, this.transform);
+        startEcho = false;
+
+        yield return new WaitForSeconds(cooldown);
+
+        startEcho = true;
 
 
     }
