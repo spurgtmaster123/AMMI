@@ -5,7 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - newScene
+<<<<<<< Updated upstream
   - Floor
+=======
+  - Collect
+>>>>>>> Stashed changes
   layers:
   - Default
   - TransparentFX
