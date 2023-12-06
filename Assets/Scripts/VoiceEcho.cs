@@ -1,6 +1,7 @@
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 public class VoiceEcho : MonoBehaviour
@@ -33,7 +34,9 @@ public class VoiceEcho : MonoBehaviour
         //then the timer routine will start, spawning the echosphere.
         //Loudness is then reset to zero until the next michrophone input
         float loudness = detector.GetLoudnessFromMicrophone() * loudnessBooster;
-        
+
+        //Debug.Log(loudness);
+
         if (loudness > threshold)
         {
             if (startEcho) { StartCoroutine(timer()); }

@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.XR;
 using static UnityEditor.PlayerSettings;
 
 public class LegDataLogging : MonoBehaviour
 {
 
-    [SerializeField] private TextMeshProUGUI debugText;
+    //[SerializeField] private TextMeshProUGUI debugText;
     private Vector3 leg_vel;
     public Vector3 leg_vel_threshold;
 
@@ -54,6 +55,42 @@ public class LegDataLogging : MonoBehaviour
     public GameObject echo;
     private float threshold;
 
+
+    // Til mean calc
+    private List<float> jolts = new List<float>();
+    public int meanCalcAmount;
+
+
+    //// Et andet forsøg på accelerometer access
+    //public Text valores;
+
+    //private XRNode lxRNode = XRNode.RightHand;
+
+    //private List<InputDevice> devices = new List<InputDevice>();
+    //private InputDevice device;
+
+    //private bool devicePositionChosen;
+    //private Vector3 devicePositionValue = Vector3.zero;
+    //private Vector3 prevdevicePositionValue;
+
+    ////Access to the hardware device and gets its information saving it in the variable device
+    //void GetDevice()
+    //{
+    //    InputDevices.GetDevicesAtXRNode(lxRNode, devices);
+    //    device = devices[0];
+
+    //}
+
+    //// Checks if the device is enable, if not it takes action and calls the GetDevice function
+    //void OnEnable()
+    //{
+    //    if (!device.isValid)
+    //    {
+    //        GetDevice();
+    //    }
+    //}
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -61,8 +98,14 @@ public class LegDataLogging : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody>();
     }
 
+
+
+
+
+
+
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         // Laver list over nodes
         List<XRNodeState> nodes = new List<XRNodeState>();
@@ -74,15 +117,10 @@ public class LegDataLogging : MonoBehaviour
             // Hvis nodetypen er den controller der sidder på benet...
             if (node.nodeType == XRNode.RightHand)
             {
-                // ... så tager vi hastigheden af controlleren, debugger
+                // ... så tager vi hastigheden af controlleren
                 node.TryGetVelocity(out leg_vel);
-                positionRH = handPos.position;
-                Debug.Log(positionRH);
-                //node.TryGetAcceleration(out leg_acc);
-                //debugText.SetText(leg_vel.ToString());
-                //Debug.Log("Leg vel: " + leg_vel);
-                //Debug.Log(leg_acc);
-                //VelToJolt(leg_vel);
+                //positionRH = handPos.position;
+                //Debug.Log(positionRH);
 
                 // Start med at sætte de nyhentede værdier til "newVel" og "newTime"
                 newVel = leg_vel;
@@ -109,22 +147,47 @@ public class LegDataLogging : MonoBehaviour
 
                 oldAccel = accel;
 
-
-
-                // Send data script ting
-                // echolocation.LegSignal(leg_vel.z);
-
-                // Og hvis hastigheden nedad er højere end threshold for signal, så sendes et signal
-                if (jolt <= leg_vel_threshold.z)
-                {
-                    // Her er kode der sender et signal til script om at de skal lave texture-ting
-
-                    //Debug.Log("LEG");
-
-                }
+                //if (jolts.Count < meanCalcAmount)
+                //{
+                //    jolts.Add(Mathf.Abs(jolt));
+                //}
+                //else if (jolts.Count == meanCalcAmount)
+                //{
+                //    jolts.RemoveAt(0);
+                //    jolts.Add(Mathf.Abs(jolt));
+                //}
 
             }
         }
+
+
+        //if (!device.isValid)
+        //{
+        //    GetDevice();
+        //}
+
+        //// capturing position changes
+        //InputFeatureUsage<Vector3> devicePositionsUsage = CommonUsages.devicePosition;
+        //// make sure the value is not zero and that it has changed
+        //if (devicePositionValue != prevdevicePositionValue)
+        //{
+        //    devicePositionChosen = false;
+        //}
+
+        //if (device.TryGetFeatureValue(devicePositionsUsage, out devicePositionValue) && devicePositionValue != Vector3.zero && !devicePositionChosen)
+        //{
+        //    valores.text = devicePositionValue.ToString("F3");
+        //    prevdevicePositionValue = devicePositionValue;
+        //    devicePositionChosen = true;
+        //}
+        //else if (devicePositionValue == Vector3.zero && devicePositionChosen)
+        //{
+        //    valores.text = devicePositionValue.ToString("F3");
+        //    prevdevicePositionValue = devicePositionValue;
+        //    devicePositionChosen = false;
+        //}
+
+
 
 
 
@@ -182,14 +245,17 @@ public class LegDataLogging : MonoBehaviour
     {
         if (CompareTag("Floor"))
         {
-            echoValueForFoot = rb.velocity.y;
 
-            echoValueForFoot = jolt;
+            echoValueForFoot = Mathf.Abs(jolt);
 
-            //if (voiceEcho.startEcho)
+
+            //for (int i = 0; i < jolts.Count; i++)
             //{
-            //    StartCoroutine(voiceEcho.timer());
+            //    echoValueForFoot += jolts[i];
             //}
+
+            //echoValueForFoot /= jolts.Count;
+
 
             if (echoValueForFoot > threshold)
             {

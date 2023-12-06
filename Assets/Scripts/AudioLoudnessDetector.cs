@@ -10,8 +10,8 @@ public class AudioLoudnessDetector : MonoBehaviour
     public int sampleWindow = 64;
     private AudioClip microphoneClip;
     public int deviceNmr;
-    
-    float totalVolume = 0;
+
+    float totalVolume;
 
 
     // Start is called before the first frame update
@@ -40,6 +40,8 @@ public class AudioLoudnessDetector : MonoBehaviour
     {
         // Samplewindow is used to determine the samples "before" the clip which will be the data that the volume will be detected on.
         // Though the start should not be less than 0, as no data will be found
+        totalVolume = 0;
+
         int startPosition = clipPosition - sampleWindow;
 
         if (startPosition < 0)
