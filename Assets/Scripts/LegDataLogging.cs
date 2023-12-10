@@ -53,8 +53,9 @@ public class LegDataLogging : MonoBehaviour
     private bool startEcho = true;
     private float cooldown;
     public GameObject echo;
-    private float threshold;
+    public float threshold;
 
+    Vector3 echoPosition;
 
     // Til mean calc
     private List<float> jolts = new List<float>();
@@ -243,8 +244,11 @@ public class LegDataLogging : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (CompareTag("Floor"))
+        Debug.Log("collider hit: " + other.gameObject.name);
+        
+        if (other.CompareTag("Floor"))
         {
+            Debug.Log("FloorHIT!!");
 
             echoValueForFoot = Mathf.Abs(jolt);
 
@@ -272,8 +276,9 @@ public class LegDataLogging : MonoBehaviour
 
     IEnumerator timer()
     {
+        echoPosition = gameObject.transform.position;
 
-        Instantiate(echo, this.transform);
+        Instantiate(echo, echoPosition, Quaternion.identity);
         startEcho = false;
 
         yield return new WaitForSeconds(cooldown);

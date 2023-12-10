@@ -228,7 +228,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 3783412695379861562}
+    m_TransformParent: {fileID: 2546230744289491302}
     m_Modifications:
     - target: {fileID: 1324499761912752089, guid: 0bc95e95bfb7c494180ecf296d93c563,
         type: 3}
@@ -238,17 +238,17 @@ PrefabInstance:
     - target: {fileID: 7395956422160402931, guid: 0bc95e95bfb7c494180ecf296d93c563,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.060493637
+      value: 0.06049394
       objectReference: {fileID: 0}
     - target: {fileID: 7395956422160402931, guid: 0bc95e95bfb7c494180ecf296d93c563,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -1.36144
       objectReference: {fileID: 0}
     - target: {fileID: 7395956422160402931, guid: 0bc95e95bfb7c494180ecf296d93c563,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.16656351
+      value: 0.16656326
       objectReference: {fileID: 0}
     - target: {fileID: 7395956422160402931, guid: 0bc95e95bfb7c494180ecf296d93c563,
         type: 3}
@@ -481,14 +481,14 @@ PrefabInstance:
     - {fileID: 393207239731357619, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
     - {fileID: 9160089310876675538, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
     m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 1717954561962503726, guid: f6336ac4ac8b4d34bc5072418cdc62a0,
-        type: 3}
-      insertIndex: 0
-      addedObject: {fileID: 5099578531733868133}
     - targetCorrespondingSourceObject: {fileID: 1767192434, guid: f6336ac4ac8b4d34bc5072418cdc62a0,
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 4185392394948087221}
+    - targetCorrespondingSourceObject: {fileID: 1767192434, guid: f6336ac4ac8b4d34bc5072418cdc62a0,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5099578531733868133}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1717954561962503725, guid: f6336ac4ac8b4d34bc5072418cdc62a0,
         type: 3}
@@ -599,6 +599,7 @@ MonoBehaviour:
   handPos: {fileID: 2546230744453650917}
   voiceEcho: {fileID: 227935498126691652}
   echo: {fileID: 410007766375221130, guid: 9a5a4ec2caccf7a498a1ad94aa93131a, type: 3}
+  threshold: 0
   meanCalcAmount: 0
 --- !u!4 &2546230744453650917 stripped
 Transform:

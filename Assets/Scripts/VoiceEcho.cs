@@ -27,9 +27,15 @@ public class VoiceEcho : MonoBehaviour
 
     public GameObject echo;
 
+    Vector3 echoPosition;
+
     // Update is called once per frame
     void Update()
     {
+        //echoPosition = gameObject.transform.position;
+
+
+
         //The script will continously look for the input from the microphone and when the threshold is reached,
         //then the timer routine will start, spawning the echosphere.
         //Loudness is then reset to zero until the next michrophone input
@@ -47,7 +53,9 @@ public class VoiceEcho : MonoBehaviour
     //This limits the amount of echospheres that can be spawned even while continously making noise.
     public IEnumerator timer()
     {
-        Instantiate(echo, this.transform);
+        echoPosition = gameObject.transform.position;
+
+        Instantiate(echo, echoPosition, Quaternion.identity);
 
         startEcho = false;
 
